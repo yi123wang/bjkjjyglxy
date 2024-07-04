@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>top10成绩柱状图</title>
+    <script src="Js/echarts.min.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height: 400px;"></div>
+<script>
+    var myChart = echarts.init(document.getElementById("main"));
+
+    // 数学数据
+    var mathData = [
+        { "学生ID": 962, "数学": 99 },
+        { "学生ID": 528, "数学": 99 },
+        { "学生ID": 597, "数学": 99 },
+        { "学生ID": 244, "数学": 99 },
+        { "学生ID": 644, "数学": 99 },
+        { "学生ID": 216, "数学": 99 },
+        { "学生ID": 649, "数学": 99 },
+        { "学生ID": 709, "数学": 99 },
+        { "学生ID": 414, "数学": 99 }
+    ];
+
+    // 英语数据
+    var englishData = [
+        { "学生ID": 460, "英语": 99 },
+        { "学生ID": 455, "英语": 99 },
+        { "学生ID": 297, "英语": 99 },
+        { "学生ID": 112, "英语": 99 },
+        { "学生ID": 390, "英语": 99 },
+        { "学生ID": 48, "英语": 99 },
+        { "学生ID": 416, "英语": 99 },
+        { "学生ID": 431, "英语": 99 },
+        { "学生ID": 33, "英语": 99 }
+    ];
+
+    // 物理数据
+    var physicsData = [
+        { "学生ID": 849, "物理": 99 },
+        { "学生ID": 343, "物理": 99 },
+        { "学生ID": 526, "物理": 99 },
+        { "学生ID": 293, "物理": 99 },
+        { "学生ID": 567, "物理": 99 },
+        { "学生ID": 37, "物理": 99 },
+        { "学生ID": 574, "物理": 99 },
+        { "学生ID": 591, "物理": 99 },
+        { "学生ID": 662, "物理": 99 }
+    ];
+
+    // 总成绩数据
+    var totalScoresData = [
+        { "学生ID": 908, "总成绩": 296.0 },
+        { "学生ID": 6120, "总成绩": 295.0 },
+        { "学生ID": 5701, "总成绩": 295.0 },
+        { "学生ID": 2150, "总成绩": 294.0 },
+        { "学生ID": 8857, "总成绩": 294.0 },
+        { "学生ID": 1318, "总成绩": 294.0 },
+        { "学生ID": 7887, "总成绩": 292.0 },
+        { "学生ID": 4536, "总成绩": 292.0 },
+        { "学生ID": 1122, "总成绩": 291.0 },
+        { "学生ID": 6292, "总成绩": 291.0 }
+    ];
+
+    var option = {
+        title: {
+            text: 'top10成绩柱状图'
+        },
+        xAxis: {
+            type: 'category',
+            data: mathData.map(item => item["学生ID"])
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value}'
+            }
+        },
+        series: [
+            {
+                name: '数学',
+                data: mathData.map(item => item["数学"]),
+                type: 'bar',
+                itemStyle: {
+                    color: '#5793f3' // 蓝色代表数学
+                }
+            },
+            {
+                name: '英语',
+                data: englishData.map(item => item["英语"]),
+                type: 'bar',
+                itemStyle: {
+                    color: '#d14a61' // 红色代表英语
+                }
+            },
+            {
+                name: '物理',
+                data: physicsData.map(item => item["物理"]),
+                type: 'bar',
+                itemStyle: {
+                    color: '#675bba' // 紫色代表物理
+                }
+            },
+            {
+                name: '总成绩',
+                data: totalScoresData.map(item => item["总成绩"]),
+                type: 'bar',
+                itemStyle: {
+                    color: '#67c79f' // 绿色代表总成绩
+                }
+            }
+        ]
+    };
+
+    myChart.setOption(option);
+</script>
+</body>
+</html>

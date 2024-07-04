@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>中国疫情分布图</title>
+    <script src="Js/echarts.min.js"></script>
+    <script src="Js/china.js"></script>
+</head>
+<body>
+
+<div id="main" style="width: 800px; height: 600px;"></div>
+</body>
+<script>
+    var myChart = echarts.init(document.getElementById("main"));
+    fetch("./Js/dataMap.json")
+        .then(resp => resp.json()) //将我们的流数据转成json
+        .then(
+            resp => {
+                var getListByCountryTypeService1 = resp.getListByCountryTypeService1;
+                var filterData = [];
+                getListByCountryTypeService1.forEach(element => {
+                    filterData.push({
+                        name: element.provinceShortName,
+                        value: element.confirmedCount,
+                        deadCount: element.deadCount,
+                        curedCount: element.curedCount
+                    })
+                });
+                myChart.setOption({
+                    title: {
+                        text: "中国疫情统计图",
+                        left: "center",
+                        top: 10
+                    },
+                    backgroundColor: "#f7f7f7",
+                    visualMap: [{
+                        type: "piecewise",
+                        pieces: [
+                            {gt: 10000},
+                            {gt: 1000, lte: 9999},
+                            {gt: 100, lte: 999},
+                            {gt: 10, lte: 99},
+                            {gt: 0, lte: 9}
+                        ],
+                        inRange: {
+                            color: ['#fdebcf', '#f59e83', '#e55e4e', '#cb2a2f', '#811c24']
+                        }
+                    }],
+                    tooltip: {
+                        formatter: function (params) {
+                            return `地区: ${params.name} <br/> 确认 : ${params.value}人 <br/> 治愈
+                        ${params.data.curedCount} 人 <br/>  死亡 : ${params.data.deadCount} 人 <br/>`
+                        }
+                    },
+                    series: [
+                        {
+                            type: 'map',
+                            map: 'china',
+                            label: {
+                                show: true
+                            },
+                            data: filterData
+                        }]
+                })
+            })
+</script>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>柱状图</title>
+    <script src="Js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="main" style="width: 600px;height: 400px;">
+
+    </div>
+</body>
+<script>
+    var myChart = echarts.init(document.getElementById("main"))
+    var option ={
+        title:{
+            text:'入门实例'
+        },
+        tooltip:{},
+        legend:{
+            data:['精髓']
+        },
+        xAxis:{
+            data:["衬衫","羊毛衫","雪绒衫","高跟鞋","袜子"]
+        },
+        yAxis:{},
+        series:[{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+
+    };
+    myChart.setOption(option);
+</script>
+</html>
